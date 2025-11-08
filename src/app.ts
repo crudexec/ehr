@@ -1,16 +1,19 @@
 import 'express-async-errors';
 import express from 'express';
+import path from 'path';
 import cors from 'cors';
 import helmet from 'helmet';
 import config from './config';
 import routes from './routes';
-import { errorHandler, notFoundHandler } from './middleware/errorHandler';
+import { errorHandler } from './middleware/errorHandler';
 import requestLogger from './middleware/requestLogger';
 
 const app = express();
 
 // Security middleware
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: false, // Disable for React app
+}));
 app.use(cors());
 
 // Body parsing middleware
@@ -25,18 +28,29 @@ if (config.env !== 'test') {
 // API routes
 app.use('/api/v1', routes);
 
-// Root route
-app.get('/', (req, res) => {
-  res.json({
-    success: true,
-    message: 'Welcome to EHR System API',
-    version: '1.0.0',
-    docs: '/api/v1/health',
+// Serve static frontend files in production
+if (config.env === 'production') {
+  const clientPath = path.join(__dirname, '../../client/dist');
+  app.use(express.static(clientPath));
+
+  // Handle React routing - serve index.html for all non-API routes
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(clientPath, 'index.html'));
   });
-});
+} else {
+  // Development - just return API info
+  app.get('/', (req, res) => {
+    res.json({
+      success: true,
+      message: 'EHR System API - Development Mode',
+      version: '1.0.0',
+      api: '/api/v1/health',
+      frontend: 'http://localhost:3000',
+    });
+  });
+}
 
 // Error handling
-app.use(notFoundHandler);
 app.use(errorHandler);
 
 export default app;
