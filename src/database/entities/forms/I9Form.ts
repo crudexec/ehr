@@ -67,17 +67,17 @@ export class I9Form extends BaseEntity {
   @Column({ name: 'employee_signature_url', nullable: true })
   employeeSignatureUrl?: string;
 
-  @Column({ name: 'employee_signed_at', type: 'timestamp', nullable: true })
+  @Column({ name: 'employee_signed_at', type: 'datetime', nullable: true })
   employeeSignedAt?: Date;
 
   @Column({ name: 'employer_signature_url', nullable: true })
   employerSignatureUrl?: string;
 
-  @Column({ name: 'employer_signed_at', type: 'timestamp', nullable: true })
+  @Column({ name: 'employer_signed_at', type: 'datetime', nullable: true })
   employerSignedAt?: Date;
 
   @Column({
-    type: 'enum',
+    type: 'simple-enum',
     enum: FormStatus,
     default: FormStatus.DRAFT,
   })

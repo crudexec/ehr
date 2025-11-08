@@ -30,7 +30,7 @@ app.use('/api/v1', routes);
 
 // Serve static frontend files in production
 if (config.env === 'production') {
-  const clientPath = path.join(__dirname, '../../client/dist');
+  const clientPath = path.join(__dirname, '../client/dist');
   app.use(express.static(clientPath));
 
   // Handle React routing - serve index.html for all non-API routes

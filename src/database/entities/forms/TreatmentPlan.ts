@@ -32,7 +32,7 @@ export class TreatmentPlan extends BaseEntity {
   @Column({ name: 'primary_goal', type: 'text' })
   primaryGoal: string;
 
-  @Column({ name: 'treatment_goals', type: 'jsonb', nullable: true })
+  @Column({ name: 'treatment_goals', type: 'simple-json', nullable: true })
   treatmentGoals?: {
     goal: string;
     targetDate: Date;
@@ -41,7 +41,7 @@ export class TreatmentPlan extends BaseEntity {
   }[];
 
   // Treatment Schedule
-  @Column({ type: 'jsonb', nullable: true })
+  @Column({ type: 'simple-json', nullable: true })
   schedule?: {
     day: string;
     time: string;
@@ -53,27 +53,27 @@ export class TreatmentPlan extends BaseEntity {
   @Column({ name: 'progress_notes', type: 'text', nullable: true })
   progressNotes?: string;
 
-  @Column({ name: 'last_reviewed', type: 'timestamp', nullable: true })
+  @Column({ name: 'last_reviewed', type: 'datetime', nullable: true })
   lastReviewed?: Date;
 
-  @Column({ name: 'next_review', type: 'timestamp', nullable: true })
+  @Column({ name: 'next_review', type: 'datetime', nullable: true })
   nextReview?: Date;
 
   // Signatures
   @Column({ name: 'therapist_signature_url', nullable: true })
   therapistSignatureUrl?: string;
 
-  @Column({ name: 'therapist_signed_at', type: 'timestamp', nullable: true })
+  @Column({ name: 'therapist_signed_at', type: 'datetime', nullable: true })
   therapistSignedAt?: Date;
 
   @Column({ name: 'guardian_signature_url', nullable: true })
   guardianSignatureUrl?: string;
 
-  @Column({ name: 'guardian_signed_at', type: 'timestamp', nullable: true })
+  @Column({ name: 'guardian_signed_at', type: 'datetime', nullable: true })
   guardianSignedAt?: Date;
 
   @Column({
-    type: 'enum',
+    type: 'simple-enum',
     enum: FormStatus,
     default: FormStatus.DRAFT,
   })

@@ -36,7 +36,7 @@ export class SpecificNeedsForm extends BaseEntity {
   guardianPhone?: string;
 
   // Service Needs
-  @Column({ name: 'service_needs', type: 'jsonb', nullable: true })
+  @Column({ name: 'service_needs', type: 'simple-json', nullable: true })
   serviceNeeds?: {
     service: string;
     frequency: string;
@@ -83,11 +83,11 @@ export class SpecificNeedsForm extends BaseEntity {
   @Column({ name: 'guardian_signature_url', nullable: true })
   guardianSignatureUrl?: string;
 
-  @Column({ name: 'guardian_signed_at', type: 'timestamp', nullable: true })
+  @Column({ name: 'guardian_signed_at', type: 'datetime', nullable: true })
   guardianSignedAt?: Date;
 
   @Column({
-    type: 'enum',
+    type: 'simple-enum',
     enum: FormStatus,
     default: FormStatus.DRAFT,
   })

@@ -11,17 +11,17 @@ export class Event extends BaseEntity {
   @Column({ type: 'text', nullable: true })
   description?: string;
 
-  @Column({ name: 'event_date', type: 'timestamp' })
+  @Column({ name: 'event_date', type: 'datetime' })
   eventDate: Date;
 
-  @Column({ name: 'end_date', type: 'timestamp', nullable: true })
+  @Column({ name: 'end_date', type: 'datetime', nullable: true })
   endDate?: Date;
 
   @Column({ nullable: true })
   location?: string;
 
   @Column({
-    type: 'enum',
+    type: 'simple-enum',
     enum: EventStatus,
     default: EventStatus.SCHEDULED,
   })

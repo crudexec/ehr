@@ -94,8 +94,8 @@ export class AuthService {
     };
 
     return jwt.sign(payload, config.jwt.secret, {
-      expiresIn: config.jwt.expiresIn,
-    });
+      expiresIn: config.jwt.expiresIn as string,
+    } as jwt.SignOptions);
   }
 
   async verifyToken(token: string): Promise<JwtPayload> {
