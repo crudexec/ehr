@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: ehr-app-dev
+    environment:
+      NODE_ENV: development
+      PORT: 4000
+      DB_PATH: /app/data/database.sqlite
+      JWT_SECRET: dev-secret-key
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./src:/app/src
+      - ./logs:/app/logs
+      - ./data:/app/data
+    restart: unless-stopped
+    command: npm run dev
