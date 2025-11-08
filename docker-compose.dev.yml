@@ -1,17 +1,19 @@
 version: '3.8'
 
 services:
-  postgres:
-    image: postgres:15-alpine
-    container_name: ehr-postgres-dev
+  app:
+    build: .
+    container_name: ehr-app-dev
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: ehr_system
+      NODE_ENV: development
+      PORT: 4000
+      DB_PATH: /app/data/database.sqlite
+      JWT_SECRET: dev-secret-key
     ports:
-      - "5432:5432"
+      - "4000:4000"
     volumes:
-      - postgres_dev_data:/var/lib/postgresql/data
-
-volumes:
-  postgres_dev_data:
+      - ./src:/app/src
+      - ./logs:/app/logs
+      - ./data:/app/data
+    restart: unless-stopped
+    command: npm run dev

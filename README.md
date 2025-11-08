@@ -1,6 +1,6 @@
 # EHR System - Electronic Health Records Management
 
-A comprehensive Electronic Health Records (EHR) management system built with TypeScript, Express, and PostgreSQL.
+A comprehensive Electronic Health Records (EHR) management system built with TypeScript, Express, and SQLite.
 
 ## Features
 
@@ -27,7 +27,7 @@ A comprehensive Electronic Health Records (EHR) management system built with Typ
 - **Runtime**: Node.js 20+
 - **Language**: TypeScript
 - **Framework**: Express.js
-- **Database**: PostgreSQL
+- **Database**: SQLite (better-sqlite3)
 - **ORM**: TypeORM
 - **Authentication**: JWT (JSON Web Tokens)
 - **Validation**: Custom middleware
@@ -64,8 +64,9 @@ ehr/
 ### Prerequisites
 
 - Node.js 20 or higher
-- PostgreSQL 15 or higher
 - npm or yarn
+
+No database installation required! SQLite runs as an embedded database.
 
 ### Installation
 
@@ -80,18 +81,13 @@ cd ehr
 npm install
 ```
 
-3. Set up environment variables:
+3. Set up environment variables (optional):
 ```bash
 cp .env.example .env
-# Edit .env with your configuration
+# Edit .env with your configuration (defaults work fine)
 ```
 
-4. Start PostgreSQL (using Docker):
-```bash
-docker-compose -f docker-compose.dev.yml up -d
-```
-
-5. Run the application:
+4. Run the application:
 ```bash
 # Development mode with hot reload
 npm run dev
@@ -100,6 +96,8 @@ npm run dev
 npm run build
 npm start
 ```
+
+The SQLite database file will be automatically created on first run.
 
 ### Using Docker
 
@@ -246,7 +244,7 @@ See `.env.example` for all available configuration options:
 
 - `NODE_ENV`: Environment (development/production)
 - `PORT`: Server port (default: 4000)
-- `DB_*`: Database connection settings
+- `DB_PATH`: Path to SQLite database file (default: database.sqlite)
 - `JWT_SECRET`: Secret key for JWT tokens
 - `AWS_*`: AWS S3 configuration for file uploads
 

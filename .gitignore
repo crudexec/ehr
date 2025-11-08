@@ -38,6 +38,8 @@ temp/
 
 # Database
 *.sqlite
+*.sqlite-shm
+*.sqlite-wal
 *.db
 
 # Coverage

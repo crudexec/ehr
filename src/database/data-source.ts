@@ -3,12 +3,8 @@ import { DataSource } from 'typeorm';
 import config from '../config';
 
 export const AppDataSource = new DataSource({
-  type: 'postgres',
-  host: config.database.host,
-  port: config.database.port,
-  username: config.database.username,
-  password: config.database.password,
-  database: config.database.database,
+  type: 'better-sqlite3',
+  database: config.database.path || 'database.sqlite',
   synchronize: config.env === 'development', // Auto-sync in dev only
   logging: config.env === 'development',
   entities: [__dirname + '/entities/**/*.{ts,js}'],
