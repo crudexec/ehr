@@ -24,6 +24,7 @@ A comprehensive Electronic Health Records (EHR) management system built with Typ
 
 ## Technology Stack
 
+### Backend
 - **Runtime**: Node.js 20+
 - **Language**: TypeScript
 - **Framework**: Express.js
@@ -34,29 +35,43 @@ A comprehensive Electronic Health Records (EHR) management system built with Typ
 - **Logging**: Winston
 - **Security**: Helmet, CORS
 
+### Frontend
+- **Framework**: React 18
+- **Language**: TypeScript
+- **Build Tool**: Vite
+- **Routing**: React Router v6
+- **Styling**: Tailwind CSS
+- **HTTP Client**: Axios
+- **Icons**: Lucide React
+
 ## Project Structure
 
 ```
 ehr/
-├── src/
+├── src/                     # Backend source code
 │   ├── config/              # Configuration files
 │   ├── controllers/         # Request handlers
 │   ├── database/
 │   │   ├── entities/        # TypeORM entities
-│   │   ├── migrations/      # Database migrations
 │   │   └── data-source.ts   # Database connection
 │   ├── middleware/          # Express middleware
 │   ├── routes/              # API routes
 │   ├── services/            # Business logic
 │   ├── types/               # TypeScript types
-│   ├── utils/               # Utility functions
-│   ├── app.ts               # Express app setup
-│   └── index.ts             # Entry point
+│   └── utils/               # Utility functions
+├── client/                  # Frontend React application
+│   ├── src/
+│   │   ├── components/      # React components
+│   │   ├── contexts/        # React contexts
+│   │   ├── pages/           # Page components
+│   │   ├── services/        # API services
+│   │   └── types/           # TypeScript types
+│   └── package.json
+├── data/                    # SQLite database storage
 ├── logs/                    # Application logs
 ├── .env.example             # Environment variables template
 ├── docker-compose.yml       # Docker configuration
-├── Dockerfile               # Docker build file
-└── package.json             # Dependencies
+└── package.json             # Root package.json
 ```
 
 ## Getting Started
@@ -76,28 +91,54 @@ git clone <repository-url>
 cd ehr
 ```
 
-2. Install dependencies:
+2. Install all dependencies (backend + frontend):
 ```bash
-npm install
+npm run install:all
 ```
 
 3. Set up environment variables (optional):
 ```bash
+# Backend environment
 cp .env.example .env
-# Edit .env with your configuration (defaults work fine)
+
+# Frontend environment
+cp client/.env.example client/.env
 ```
 
 4. Run the application:
-```bash
-# Development mode with hot reload
-npm run dev
 
-# Production build
+**Full Stack Development** (recommended):
+```bash
+# Runs both backend (4000) and frontend (3000) concurrently
+npm run dev:full
+```
+
+**Backend Only**:
+```bash
+npm run dev
+```
+
+**Frontend Only**:
+```bash
+npm run dev:client
+```
+
+**Production Build**:
+```bash
+# Build both backend and frontend
 npm run build
+
+# Start production server (serves both API and static frontend)
 npm start
 ```
 
 The SQLite database file will be automatically created on first run.
+
+### Accessing the Application
+
+- **Frontend**: http://localhost:3000 (development)
+- **Backend API**: http://localhost:4000/api/v1
+- **Production**: http://localhost:4000 (serves both)
 
 ### Using Docker
 
