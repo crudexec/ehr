@@ -32,7 +32,7 @@ export class IntakeFormService {
   async findByUserId(
     userId: string,
     params: PaginationParams
-  ): Promise<{ forms: IntakeForm[]; total: number }> {
+  ): Promise<{ data: IntakeForm[]; total: number; page: number; limit: number }> {
     const { page, limit } = params;
     const skip = (page - 1) * limit;
 
@@ -44,7 +44,7 @@ export class IntakeFormService {
       relations: ['user'],
     });
 
-    return { forms, total };
+    return { data: forms, total, page, limit };
   }
 
   async update(id: string, data: Partial<IntakeForm>): Promise<IntakeForm> {

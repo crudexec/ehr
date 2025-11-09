@@ -8,7 +8,7 @@ export class UserService {
 
   async findAll(
     params: PaginationParams
-  ): Promise<{ users: User[]; total: number; page: number; limit: number }> {
+  ): Promise<{ data: User[]; total: number; page: number; limit: number }> {
     const { page, limit } = params;
     const skip = (page - 1) * limit;
 
@@ -18,7 +18,7 @@ export class UserService {
       order: { createdAt: 'DESC' },
     });
 
-    return { users, total, page, limit };
+    return { data: users, total, page, limit };
   }
 
   async findById(id: string): Promise<User> {

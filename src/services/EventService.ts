@@ -30,7 +30,7 @@ export class EventService {
     return event;
   }
 
-  async findAll(params: PaginationParams): Promise<{ events: Event[]; total: number }> {
+  async findAll(params: PaginationParams): Promise<{ data: Event[]; total: number; page: number; limit: number }> {
     const { page, limit } = params;
     const skip = (page - 1) * limit;
 
@@ -41,7 +41,7 @@ export class EventService {
       relations: ['organizer', 'attendee'],
     });
 
-    return { events, total };
+    return { data: events, total, page, limit };
   }
 
   async findByDateRange(startDate: Date, endDate: Date): Promise<Event[]> {
