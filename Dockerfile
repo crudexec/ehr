@@ -2,20 +2,26 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Copy package files
+# Copy root package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci --only=production
+# Copy client package files
+COPY client/package*.json ./client/
 
-# Copy source code
+# Install all dependencies (backend + frontend)
+RUN npm install && cd client && npm install
+
+# Copy all source code
 COPY . .
 
-# Build TypeScript
-RUN npm run build
+# Build backend (TypeScript)
+RUN npm run build:server
+
+# Build frontend (React + Vite)
+RUN npm run build:client
 
 # Expose port
 EXPOSE 4000
 
-# Start application
+# Start application in production mode
 CMD ["npm", "start"]

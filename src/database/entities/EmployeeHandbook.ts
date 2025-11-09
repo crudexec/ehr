@@ -11,7 +11,7 @@ export class EmployeeHandbook extends BaseEntity {
   @JoinColumn({ name: 'user_id' })
   user: User;
 
-  @Column({ name: 'agreed_at', type: 'timestamp', nullable: true })
+  @Column({ name: 'agreed_at', type: 'datetime', nullable: true })
   agreedAt?: Date;
 
   @Column({ name: 'handbook_version' })

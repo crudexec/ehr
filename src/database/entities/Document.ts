@@ -27,7 +27,7 @@ export class Document extends BaseEntity {
   mimeType: string;
 
   @Column({
-    type: 'enum',
+    type: 'simple-enum',
     enum: DocumentType,
     default: DocumentType.GENERAL,
   })

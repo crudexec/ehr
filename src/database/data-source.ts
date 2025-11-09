@@ -5,7 +5,7 @@ import config from '../config';
 export const AppDataSource = new DataSource({
   type: 'better-sqlite3',
   database: config.database.path || 'database.sqlite',
-  synchronize: config.env === 'development', // Auto-sync in dev only
+  synchronize: true, // Auto-create tables
   logging: config.env === 'development',
   entities: [__dirname + '/entities/**/*.{ts,js}'],
   migrations: [__dirname + '/migrations/**/*.{ts,js}'],

@@ -19,7 +19,7 @@ export class VisitLog extends BaseEntity {
   @JoinColumn({ name: 'client_id' })
   client?: User;
 
-  @Column({ name: 'visit_date', type: 'timestamp' })
+  @Column({ name: 'visit_date', type: 'datetime' })
   visitDate: Date;
 
   @Column({ name: 'visit_type', nullable: true })
@@ -87,11 +87,11 @@ export class VisitLog extends BaseEntity {
   @Column({ name: 'staff_signature_url', nullable: true })
   staffSignatureUrl?: string;
 
-  @Column({ name: 'signed_at', type: 'timestamp', nullable: true })
+  @Column({ name: 'signed_at', type: 'datetime', nullable: true })
   signedAt?: Date;
 
   @Column({
-    type: 'enum',
+    type: 'simple-enum',
     enum: FormStatus,
     default: FormStatus.DRAFT,
   })

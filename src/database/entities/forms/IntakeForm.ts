@@ -102,7 +102,7 @@ export class IntakeForm extends BaseEntity {
   schoolContact?: string;
 
   @Column({
-    type: 'enum',
+    type: 'simple-enum',
     enum: FormStatus,
     default: FormStatus.DRAFT,
   })
